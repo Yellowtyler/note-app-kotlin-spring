@@ -1,11 +1,14 @@
 package davydov.note.app.model
 
+import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
-data class Note(@Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long,
-                val text: String, val creationDate: LocalDateTime)
+@Table(name = "note")
+class Note(@Id @GeneratedValue var id: Long? = null,
+                var text: String? = null) {
+    @CreatedDate
+    @Column(updatable = false, nullable = false)
+    lateinit var creationDate: LocalDateTime
+}

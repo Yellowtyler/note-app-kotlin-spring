@@ -19,8 +19,9 @@ class NoteAppController(val noteService: NoteService): NoteAppApi {
         return noteService.getAllNotes()
     }
 
+    @ResponseBody
     @PostMapping("/create")
-    override fun addNewNote(request: Note): Note {
+    override fun addNewNote(@RequestBody request: Note): Note {
         return noteService.addNewNote(request)
     }
 
@@ -30,7 +31,7 @@ class NoteAppController(val noteService: NoteService): NoteAppApi {
     }
 
     @PostMapping("/edit")
-    override fun editNote(request: NoteUpdateDto) {
+    override fun editNote(@RequestBody request: NoteUpdateDto) {
         return noteService.editNote(request)
     }
 
