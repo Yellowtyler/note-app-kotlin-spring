@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
 
+@CrossOrigin(value = ["http://localhost:3000"])
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("api/v1/note")
