@@ -1,26 +1,31 @@
 import { useState } from "react";
 
-const AddNote = () => {
-    const [noteText, setNoteText] = useState('')
+const AddNote = ({ handleAddNote }) => {
     
+    const [noteText, setNoteText] = useState('');
+    const characterLimit = 200;
+
     const handleChange = (event) => {
-        setNoteText(event.target.value);
+        if (characterLimit - event.target.value.length >= 0) {
+            setNoteText(event.target.value);
+        }
     };
 
     const handleSaveClick = () => {
+        let date = new Date();
         fetch("http://localhost:8080/api/v1/note/create", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({text: noteText, creationDate: Date.now().toLocaleString()})})
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-          })
+            body: JSON.stringify({text: noteText, creationDate: date.toISOString()})})
+        .then(response => {
+            handleAddNote(response.json().id, noteText, date);
+        })
         .catch((error) => {
             console.error('Error:', error);
         });
+        window.location.reload();
     }
 
     return <div className="note new">
@@ -32,7 +37,7 @@ const AddNote = () => {
             onChange={handleChange}
         ></textarea>
         <div className="note-footer">
-            <small>200 Remaining</small>
+            <small>{characterLimit - noteText.length}</small>
             <button className="save" onClick={handleSaveClick}>Save</button>
         </div>
     </div>

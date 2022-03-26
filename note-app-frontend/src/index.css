@@ -12,12 +12,20 @@ code {
     monospace;
 }
 
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .container {
   max-width: 960px;
   margin-right: auto;
   margin-left: auto;
   padding-right: 15px;
   padding-left: 15px;
+  min-height: 100vh;
 }
 
 .note-list {
@@ -58,13 +66,48 @@ textarea:focus {
   border-radius: 10px;
   padding: 1rem;
   min-height: 170px;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
+  display: flex;
+  white-space: pre-wrap;
 }
 
 .note-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.delete-icon {
+  cursor: pointer;
+}
+
+.delete-icon:hover {
+  background-color: #ededed;
+  cursor: pointer;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  background-color: rgb(207, 207, 207);
+  border-radius: 10px;
+}
+
+.search input {
+  border: none;
+  background-color: rgb(207, 207, 207);
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.dark-mode {
+  background-color: black;
+}
+
+.dark-mode h1 {
+  color: white;
 }
